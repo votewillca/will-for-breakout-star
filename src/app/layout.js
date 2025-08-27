@@ -16,11 +16,11 @@ export const metadata = {
   openGraph: {
     title: 'Will Ashley for NYLON – Boldest Breakout Star',
     description: 'Vote for Will on Nylon for Boldest Breakout Star',
-    url: 'https://votewillca.github.io/will-for-breakout-star',
+    url: 'https://will-for-breakout-star.vercel.app', // your Vercel deployment
     siteName: 'Vote Will Campaign',
     images: [
       {
-        url: '/link-preview.jpg', // now served from /public
+        url: 'https://will-for-breakout-star.vercel.app/link-preview.jpg', // absolute URL for OG
         width: 1200,
         height: 630,
         alt: 'WILL ASHLEY FOR NYLON preview thumbnail',
@@ -33,7 +33,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Vote Will on Nylon',
     description: 'Vote for Will on Nylon for Boldest Breakout Star',
-    images: ['/link-preview.jpg'], // same here
+    images: ['https://will-for-breakout-star.vercel.app/link-preview.jpg'], // absolute URL for Twitter
   },
 }
 
