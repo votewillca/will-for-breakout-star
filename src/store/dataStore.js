@@ -35,6 +35,8 @@ export const useDataStore = create((set) => ({
   enemyPlayerDisplayName: GENERAL_DETAILS.enemyPlayerDisplayName,
   primaryPlayerTotalVotes: null,
 
+  currentLanguage: 'english',
+
   // State setter
   setState: (newState) => set(newState),
 }))

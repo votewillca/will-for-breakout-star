@@ -1,11 +1,13 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import PollEmbed from '../PollEmbed'
+import { useDataStore } from '@/store/dataStore'
 
 export default function VotingSection() {
   // State controlling scale for all PollEmbed instances
   const [scale, setScale] = React.useState(0.3)
   const [refreshKey, setRefreshKey] = React.useState(Date.now())
+  const currentLanguage = useDataStore((state) => state.currentLanguage)
 
   // Handlers with min/max limits
   const increment = () => setScale((s) => Math.min(s + 0.1, 1)) // max 2x
@@ -16,15 +18,33 @@ export default function VotingSection() {
       <div className="flex w-full max-w-md flex-col items-center justify-center gap-4 p-2">
         {/* The main control panel container */}
 
-        <p className="space-y-1 text-center text-sm font-semibold text-red-500">
-          <span className="block">🚨 Please avoid refreshing the entire website frequently!</span>
-          <span className="block font-bold text-teal-400">
-            Instead, use the Refresh Polls 🔄 button below
-          </span>
-          <span className="block font-bold text-amber-400">
-            Use the zoom controls to change the size of the polls!
-          </span>
-        </p>
+        {currentLanguage === 'english' && (
+          <p className="space-y-1 text-center text-sm font-semibold text-red-500">
+            <span className="block">🚨 Please avoid refreshing the entire website frequently!</span>
+            <span className="block font-bold text-teal-400">
+              Instead, use the Refresh Polls 🔄 button below
+            </span>
+            <span className="block font-bold text-amber-400">
+              Use the zoom controls to change the size of the polls!
+            </span>
+          </p>
+        )}
+
+        {currentLanguage === 'tagalog' && (
+          <div className="space-y-2 text-center text-sm font-semibold text-white">
+            <div className="text-red-500">
+              🚨 Iwasan ang madalas na pag-refresh ng buong website!
+            </div>
+            <div>
+              Sa halip, gamitin ang{' '}
+              <span className="font-bold text-teal-400"> Refresh Polls 🔄 </span> button sa ibaba.
+            </div>
+            <div className="font-bold text-amber-400">
+              Gamitin ang zoom controls para baguhin ang laki ng polls!
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center gap-4 rounded-xl bg-teal-800/30 p-4 shadow-2xl">
           {/* Scale controls */}
 
@@ -79,29 +99,6 @@ export default function VotingSection() {
         <PollEmbed remountKey={refreshKey + '-3'} scale={scale} />
         <PollEmbed remountKey={refreshKey + '-4'} scale={scale} />
         <PollEmbed remountKey={refreshKey + '-5'} scale={scale} />
-      </div>
-      <div className="bg-card/70 max-w-sm space-y-4 rounded-lg p-6 text-center text-sm shadow-lg">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <ul className="list-disc space-y-4 pl-5 text-left text-sm">
-          <li>
-            If no math questions appear, try switching to a different browser{' '}
-            <span className="font-bold text-amber-500">
-              (e.g., Chrome, Firefox, Safari—not just tabs)
-            </span>{' '}
-            or <span className="font-bold text-teal-400">wait a full minute</span>.
-          </li>
-          <li>
-            Voting too early will{' '}
-            <span className="font-bold text-red-500">reset your cooldown</span>.
-            <br />
-            Give it a full pause or try a different browser.
-          </li>
-          <li>
-            Still no math questions? Switch to your{' '}
-            <span className="font-bold text-nowrap text-purple-500">mobile data</span>. Wait for 1 -
-            2 hours before going back to your Wifi.
-          </li>
-        </ul>
       </div>
     </section>
   )

@@ -5,6 +5,8 @@ import VotingSection from '@/components/VotingSection'
 import PersonalVoteStats from '@/components/PersonalVoteStats'
 import GapCounterSection from '@/components/GapCounterSection'
 import HotRightNowMini from '@/components/HotRightNowMini'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 
 const instantFlash = keyframes`
   0% { color: white; }
@@ -30,35 +32,83 @@ export default function Vote() {
   const lastApiUpdate = useDataStore((state) => state.lastApiUpdate)
   const hasData = allParticipantsData && lastSnapshotDate && lastApiUpdate
   const recordedVotes = useDataStore((state) => state.recordedVotes)
+  const currentLanguage = useDataStore((state) => state.currentLanguage)
 
   return (
     <div className="flex flex-col items-center space-y-8 pb-20 font-sans">
       <div className=""></div>
 
+      <LanguageToggle />
+
       <div className="flex w-full flex-wrap justify-center gap-8">
         <PersonalVoteStats />
-        <div className="flex h-[350px] max-w-sm flex-col space-y-6 overflow-hidden">
-          {/* Gap counter section */}
-          <GapCounterSection useImage={true} className="w-full" />
-
-          {/* Scrollable instructions container */}
-          <div className="bg-card/50 flex-sh w-full flex-1 overflow-auto rounded-xl border-2 border-blue-500 p-4">
-            <div className="flex flex-col gap-4">
-              {/* Voting instructions card */}
-              <h2 className="text-md text-center font-bold text-gray-900 dark:text-gray-100">
-                Voting Guide
-              </h2>
-              <ul className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
+        {currentLanguage === 'english' && (
+          <div className="flex h-[350px] max-w-2xl flex-col space-y-6 overflow-scroll rounded-xl border-2 border-blue-500">
+            <div className="space-y-4 rounded-lg p-6 text-center text-sm shadow-lg">
+              <h2 className="text-2xl font-semibold">Voting Guide</h2>
+              <ul className="list-disc space-y-4 pl-5 text-left text-sm">
                 <li>
                   Vote 5 times, then switch to a different browser (e.g., Chrome, Firefox, Safari).
                 </li>
                 <li>Votes without answered math questions aren’t counted.</li>
+                <li>
+                  If no math questions appear, try switching to a different browser{' '}
+                  <span className="font-bold text-amber-500">
+                    (e.g., Chrome, Firefox, Safari—not just tabs)
+                  </span>{' '}
+                  or <span className="font-bold text-teal-400">wait a full minute</span>.
+                </li>
+                <li>
+                  Voting too early will{' '}
+                  <span className="font-bold text-red-500">reset your cooldown</span>.
+                  <br />
+                  Give it a full pause or try a different browser.
+                </li>
+                <li>
+                  Still no math questions? Even on the Official NYLON Website? Switch to your{' '}
+                  <span className="font-bold text-nowrap text-purple-500">mobile data</span>. Wait
+                  for a full 2 hours before going back to your Wifi.
+                </li>
               </ul>
             </div>
           </div>
-        </div>
+        )}
 
-        <HotRightNowMini />
+        {currentLanguage === 'tagalog' && (
+          <div className="flex h-[350px] max-w-2xl flex-col space-y-6 overflow-scroll rounded-xl border-2 border-blue-500">
+            <div className="space-y-4 rounded-lg p-6 text-center text-sm shadow-lg">
+              <h2 className="text-2xl font-semibold">Gabay sa Pagboto</h2>
+              <ul className="list-disc space-y-4 pl-5 text-left text-sm">
+                <li>
+                  Bumoto ng 5 beses, tapos lumipat sa ibang browser (e.g., Chrome, Firefox, Safari).
+                </li>
+                <li>Hindi mabibilang ang votes na walang nasagot na math questions.</li>
+                <li>
+                  Kung walang lumalabas na math questions, subukan mong lumipat sa ibang browser{' '}
+                  <span className="font-bold text-amber-500">
+                    (e.g., Chrome, Firefox, Safari—hindi lang tabs)
+                  </span>{' '}
+                  o <span className="font-bold text-teal-400">maghintay ng isang minuto</span>.
+                </li>
+                <li>
+                  Kapag bumoto ka agad,{' '}
+                  <span className="font-bold text-red-500">
+                    mare-reset ang 1 minute cooldown mo
+                  </span>
+                  .
+                  <br />
+                  Magpahinga muna o lumipat ng ibang browser.
+                </li>
+                <li>
+                  Wala pa ring math questions? Kahit sa Official Nylon Website? Gumamit ng{' '}
+                  <span className="font-bold text-nowrap text-purple-500">mobile data</span>.
+                  Maghintay ng 2 oras bago bumalik sa Wifi.
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
+        {/* <HotRightNowMini /> */}
       </div>
       <div className="space-y-4">
         <VotingSection />
@@ -116,6 +166,40 @@ function Attribution() {
         <br />
         Message me in X / Twitter if there are bugs / problems.
       </p>
+    </div>
+  )
+}
+
+function LanguageToggle() {
+  // Access Zustand state + setter
+  const currentLanguage = useDataStore((state) => state.currentLanguage)
+  const setState = useDataStore((state) => state.setState)
+
+  // Derived boolean for the switch
+  const isTagalog = currentLanguage === 'tagalog'
+
+  // Handle toggle
+  const handleToggle = (checked) => {
+    setState({
+      currentLanguage: checked ? 'tagalog' : 'english',
+    })
+  }
+
+  return (
+    <div className="flex items-center space-x-3">
+      {/* Left label (English) */}
+
+      <Label htmlFor="lang-switch" className={!isTagalog ? 'font-bold text-blue-500' : ''}>
+        English
+      </Label>
+
+      {/* Switch from shadcn/ui */}
+      <Switch id="lang-switch" checked={isTagalog} onCheckedChange={handleToggle} />
+
+      {/* Right label (Tagalog) */}
+      <Label htmlFor="lang-switch" className={isTagalog ? 'font-bold text-pink-500' : ''}>
+        Tagalog
+      </Label>
     </div>
   )
 }
