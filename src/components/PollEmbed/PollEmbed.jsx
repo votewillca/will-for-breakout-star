@@ -28,7 +28,7 @@ export default function PollEmbed({ remountKey, scale = 1 }) {
       <iframe
         key={remountKey}
         ref={iframeRef}
-        src="/poll.html"
+        src="poll.html"
         title="Poll"
         style={{
           transform: `scale(${scale})`,

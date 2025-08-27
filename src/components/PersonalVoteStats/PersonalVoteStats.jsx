@@ -40,7 +40,7 @@ export default function VoteStats({}) {
       <CardHeader className="flex flex-col items-center justify-center gap-2">
         <div className="mx-auto w-[150px]">
           <Image
-            src="/nylon-logo.svg" // from /public folder
+            src="nylon-logo.svg" // from /public folder
             alt="Nylon Logo"
             width={3443}
             height={590}

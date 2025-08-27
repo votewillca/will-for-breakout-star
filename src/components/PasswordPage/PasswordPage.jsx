@@ -14,7 +14,7 @@ export default function PasswordPage({ children }) {
   React.useEffect(() => {
     async function fetchPassword() {
       try {
-        const res = await fetch('/logs.json') // assuming you put logs.json in /public
+        const res = await fetch('logs.json') // assuming you put logs.json in /public
         const data = await res.json()
 
         // Grab the password from x3
@@ -58,7 +58,7 @@ export default function PasswordPage({ children }) {
       <div className="flex h-screen flex-col items-center justify-center gap-5">
         <div className="mx-auto w-[300px]">
           <Image
-            src="/nylon-logo.svg" // from /public folder
+            src="nylon-logo.svg" // from /public folder
             alt="Nylon Logo"
             width={3443}
             height={590}

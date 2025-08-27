@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // static export
-  trailingSlash: true, // GitHub Pages prefers trailing slashes
-  basePath: '/will-for-breakout-star', // repo name
-  assetPrefix: '/will-for-breakout-star/', // fix _next paths
+  output: 'export',
+  distDir: 'out',
+  basePath: '/will-for-breakout-star', // <<<--- THIS IS THE FIX
+  images: {
+    unoptimized: true,
+  },
 }
+
 export default nextConfig

@@ -48,7 +48,8 @@ export default function Vote() {
               <h2 className="text-2xl font-semibold">Voting Guide</h2>
               <ul className="list-disc space-y-4 pl-5 text-left text-sm">
                 <li>
-                  Vote 5 times, then switch to a different browser (e.g., Chrome, Firefox, Safari).
+                  Vote 5 times, then switch to a different browser (e.g., Chrome, Firefox, Brave
+                  Browser,Safari).
                 </li>
                 <li>Votes without answered math questions aren’t counted.</li>
                 <li>
@@ -80,7 +81,8 @@ export default function Vote() {
               <h2 className="text-2xl font-semibold">Gabay sa Pagboto</h2>
               <ul className="list-disc space-y-4 pl-5 text-left text-sm">
                 <li>
-                  Bumoto ng 5 beses, tapos lumipat sa ibang browser (e.g., Chrome, Firefox, Safari).
+                  Bumoto ng 5 beses, tapos lumipat sa ibang browser (e.g., Chrome, Firefox, Brave
+                  Browser, Safari).
                 </li>
                 <li>Hindi mabibilang ang votes na walang nasagot na math questions.</li>
                 <li>
