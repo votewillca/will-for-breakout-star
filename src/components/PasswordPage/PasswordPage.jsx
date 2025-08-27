@@ -13,19 +13,26 @@ export default function PasswordPage({ children }) {
   // 1. Fetch the current password from your backend (e.g., GitHub API)
   React.useEffect(() => {
     async function fetchPassword() {
-      const res = await fetch(
-        'https://raw.githubusercontent.com/aroan-v/nylon-biggest-breakout-star-cache/refs/heads/main/password.json'
-      ) // replace with your real endpoint
-      const data = await res.json()
-      setServerPassword(data.password)
+      try {
+        const res = await fetch('/logs.json') // assuming you put logs.json in /public
+        const data = await res.json()
 
-      // 2. Check if user already has valid auth in localStorage
-      const storedPassword = localStorage.getItem('auth_password')
-      if (storedPassword && storedPassword === data.password) {
-        setIsAuthenticated(true)
+        // Grab the password from x3
+        const password = data.x3
+        setServerPassword(password)
+
+        // Check if user already has valid auth in localStorage
+        const storedPassword = localStorage.getItem('auth_password')
+        if (storedPassword && storedPassword === password) {
+          setIsAuthenticated(true)
+        }
+      } catch (err) {
+        console.error('Failed to fetch password:', err)
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
+
     fetchPassword()
   }, [])
 
