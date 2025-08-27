@@ -47,7 +47,7 @@ export default function VoteStats({}) {
           />
         </div>
         <h2 className="text-lg font-bold">Boldest Breakout Star</h2>
-        <p className="text-center text-sm font-bold">
+        <p className="text-center text-xs font-bold">
           Your vote is part of the story — it all adds up. 🩵
         </p>
       </CardHeader>
@@ -80,10 +80,10 @@ export default function VoteStats({}) {
       {/* Footer */}
       <CardFooter className="justify-center opacity-75">
         <p className="text-center text-xs italic">
-          Your stats may appear differently in other browsers. <br />
-          Clearing your browser cache or data will{' '}
-          <span className="font-bold text-rose-500"> reset these stats!</span> (Don’t worry—your
-          votes on NYLON’s server are safe.)
+          Stats may differ in other browsers. <br />
+          Clearing cache will <span className="font-bold text-rose-500">reset your stats</span>{' '}
+          <br />
+          (Though your votes on NYLON are safe).
         </p>
       </CardFooter>
     </Card>
