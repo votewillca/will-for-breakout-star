@@ -4,10 +4,11 @@
   "private": true,
   "homepage": "https://votewillca.github.io/will-for-breakout-star",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "export": "next build && next export",
+    "predeploy": "npm run export",
+    "deploy": "gh-pages -d out"
   },
   "type": "module",
   "dependencies": {
